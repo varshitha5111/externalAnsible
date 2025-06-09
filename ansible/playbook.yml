@@ -1,0 +1,13 @@
+name:ansible
+hosts:webs
+become:yes
+tasks:
+	name:copy war to tomcat
+	copy:
+		src:"/var/snap/jenkins/4865/workspace/externalAnsible/target/MavenAnsibleWebApp.war"
+		dest:"/opt/tomact/webapps/MavenAnsibleWebApp.war"
+		remote_src:no
+	name:automate tomcat
+	systemd:
+		name:tomcat
+		state:restarted
